@@ -1,15 +1,30 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 
 export default function App() {
+  const [enteredText, setEnteredText] = useState("");
+
+  const goalInputHandler = (enteredText) => {
+    setEnteredText(enteredText);
+  };
+
+  const addGoalHandler = () => {
+    console.log(enteredText);
+  };
+
   return (
     <View style={styles.container}>
-      <View>
-        <Text style={styles.dummyText}>Hello world!</Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.textInput}
+          placeholder="Your course goal!"
+          onChangeText={goalInputHandler}
+        />
+        <Button onPress={addGoalHandler} title="Add Goal" />
       </View>
-      <Text style={styles.dummyText}>
-        Hello welcome to native startup!🚀
-      </Text>
-      <Button title="Tap Me!" />
+      <View style={styles.goalsContainer}>
+        <Text>List of goals...</Text>
+      </View>
     </View>
   );
 }
@@ -17,15 +32,38 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop: 50,
+    paddingHorizontal: 16,
+    // flex: 1,
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
-  dummyText:{
-    margin: 16, 
+  inputContainer: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: "#cccccc",
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "#cccccc",
+    width: "70%",
+    marginRight: 8,
+    padding: 8,
+    borderRadius: 8,
+  },
+  dummyText: {
+    margin: 16,
     borderWidth: 2,
-    borderStyle:'dashed',
+    borderStyle: "dashed",
     borderColor: "red",
-    padding:16
-  }
+    padding: 16,
+  },
+  goalsContainer: {
+    flex: 4,
+  },
 });
